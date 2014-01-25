@@ -1,0 +1,8 @@
+[
+    {
+        "url":"http://*.mysite.com/*",
+        "css":"#topnav",
+        "title":"Navigation",
+        "text":"Contact the content management team if you want to change the menu"
+    }
+]

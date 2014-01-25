@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "huddoc",
+  "description": "Superimposes contextual information over a website.",
+  "version": "0.1.0",
+
+  "permissions": [
+    "tabs",
+    "*://*/*"
+  ],
+
+  "browser_action": {
+    "default_title": "huddoc",
+    "default_icon": "huddoc.png"
+  },
+
+  "background": {
+    "scripts": ["huddoc.js"],
+    "persistent": false
+  }
+}

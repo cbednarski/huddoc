@@ -1,6 +1,6 @@
 # huddoc
 
-huddoc is a chrome extension that allows you to superimpose information over your website. It's intended to show additional contextual information to an organization's internal staff to aid in routing site issues and generally understanding how a website is composed.
+huddoc is a chrome extension that allows you to superimpose information over your website. It's intended to show additional contextual information to an organization's internal staff to aid in routing site issues and generally understanding how a website is composed. "huddoc" is a portmanteau of "heads-up display" and "documentation".
 
 ## Goals / Features
 
