@@ -58,25 +58,22 @@ function ghost(selector) {
 
 function addMessage(g, rule) {
   if (!g) { return false }; // guard
-  var c = '';
+  var content = '';
 
   if (rule.title) {
-    c += '<span class="huddoc_title">' + rule.title + '</span> ';
+    content += '<span class="huddoc_title">' + rule.title + '</span> ';
   }
-  
   if (rule.description) {
-    c += '<span class="huddoc_description">' + rule.description + '</span> ';
+    content += '<span class="huddoc_description">' + rule.description + '</span> ';
   }
-
   if (rule.email) {
-    c += '<a href="mailto:' + rule.email + '" class="huddoc_link">email</a> ';
+    content += '<a href="mailto:' + rule.email + '" class="huddoc_link">email</a> ';
   }
-
   if (rule.url) {
-    c += '<a href="' + rule.url + '" class="huddoc_link">info</a> ';
+    content += '<a href="' + rule.url + '" class="huddoc_link">info</a> ';
   }
 
-  g.innerHTML = c;
+  g.innerHTML = content;
 
   return g;
 }
