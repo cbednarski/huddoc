@@ -42,6 +42,7 @@ function getPosition(selector) {
 
 function ghost(selector) {
   var el = jQuery(selector);
+  if (el.length === 0) { return false; } // guard
   var g = document.createElement('div');
 
   g.className = 'huddoc_box';
@@ -56,6 +57,7 @@ function ghost(selector) {
 }
 
 function addMessage(g, rule) {
+  if (!g) { return false }; // guard
   var c = '';
 
   if (rule.title) {
