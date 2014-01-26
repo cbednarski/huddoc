@@ -8,6 +8,7 @@ function activate() {
 function deactivate() {
   chrome.browserAction.setBadgeBackgroundColor({color: [255,0,128,255]});
   chrome.browserAction.setBadgeText({text: "Off"});
+  chrome.tabs.executeScript({code: 'deactivate()'});
   return false;
 }
 

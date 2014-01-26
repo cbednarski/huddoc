@@ -35,6 +35,11 @@ function getTopOffset(top) {
   return top - parseInt(diff);
 }
 
+function getPosition(selector) {
+  var el = jQuery(selector);
+  var style = window.getComputedStyle(el);
+}
+
 function ghost(selector) {
   var el = jQuery(selector);
   var g = document.createElement('div');
@@ -98,6 +103,10 @@ function activate() {
       addMessage(el, rule);
     }
   }
+}
+
+function deactivate() {
+  jQuery('.huddoc_box').remove();
 }
 
 huddoc_message();
