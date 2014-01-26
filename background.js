@@ -1,3 +1,5 @@
+"use strict";
+
 function activate(tabId) {
   chrome.tabs.executeScript(tabId, {code: 'activate()'});
   return true;
@@ -20,7 +22,8 @@ function toggle(tabId) {
 
 function initialize(tabId) {
   chrome.tabs.executeScript(tabId, {file: 'jquery-2.1.0.min.js'});
-  chrome.tabs.executeScript(tabId, {file: 'show_messages.js'});
+  chrome.tabs.executeScript(tabId, {file: 'Ajax.js'});
+  chrome.tabs.executeScript(tabId, {file: 'in_browser.js'});
   chrome.tabs.insertCSS(tabId, {file: 'huddoc.css'});
   chrome.pageAction.show(tabId);
 }
@@ -28,25 +31,6 @@ function initialize(tabId) {
 function dismantle(tabId) {
   chrome.pageAction.hide(tabId);
 }
-
-var Ajax = {
-  request: function(method, url, callback, payload) {
-    var req = new XMLHttpRequest();
-    req.open(method, url);
-    req.onreadystatechange = function() {
-      if (req.readyState === 4) {
-        callback(req.responseText, req);
-      }
-    };
-    req.send(payload);
-  },
-  get: function(url, callback) {
-    this.request('GET', url, callback);
-  },
-  post: function(url, payload, callback) {
-    this.request('POST', url, callback, payload);
-  }
-};
 
 var ruleset;
 

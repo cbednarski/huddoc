@@ -16,7 +16,10 @@
   },
 
   "background": {
-    "scripts": ["background.js"],
+    "scripts": [
+      "Ajax.js",
+      "background.js"
+    ],
     "persistent": false
   },
 
