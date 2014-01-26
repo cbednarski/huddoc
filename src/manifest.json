@@ -17,7 +17,7 @@
 
   "background": {
     "scripts": [
-      "Ajax.js",
+      "ajax.js",
       "background.js"
     ],
     "persistent": false
