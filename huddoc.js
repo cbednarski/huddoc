@@ -9,7 +9,6 @@ function deactivate() {
 }
 
 var activated = deactivate();
-var initialized = false;
 
 function toggle() {
   if (activated) {
