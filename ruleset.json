@@ -1,8 +1,16 @@
 [
     {
-        "url":"http://*.mysite.com/*",
-        "css":"#topnav",
-        "title":"Navigation",
-        "text":"Contact the content management team if you want to change the menu"
+        "mask":"https?://.+example\\.com.*",
+        "selector":"#header",
+        "title":"Global Navigation",
+        "description":"Edit these in the menu editor",
+        "url":"https://example.com/admin/menu/edit"
+    },
+    {
+        "mask":"https://.*example\\.com.*",
+        "selector":"#login",
+        "title":"Account",
+        "description":"Email us if you need an account",
+        "email":"admin@example.com"
     }
 ]
