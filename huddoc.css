@@ -1,0 +1,26 @@
+.huddoc_box {
+  display: block;
+  position: absolute;
+  background: rgba(255,255,128,.4);
+  color: #fff;
+  font: bold 14px helvetica, arial, sans-serif;
+  z-index: 9999999;
+  border-radius: 3px;
+}
+
+.huddoc_title {
+  font-size: 30px;
+}
+
+.huddoc_message {
+  
+}
+
+.huddoc_link {
+  color: #f00;
+  text-decoration: none;
+}
+
+.huddoc_link:hover {
+  text-decoration: underline;
+}

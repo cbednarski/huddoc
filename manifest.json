@@ -18,5 +18,10 @@
   "background": {
     "scripts": ["huddoc.js"],
     "persistent": false
-  }
+  },
+
+  "web_accessible_resources": [
+    "ruleset.json",
+    "huddoc.css"
+  ]
 }
