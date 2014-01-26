@@ -16,7 +16,7 @@
   },
 
   "background": {
-    "scripts": ["huddoc.js"],
+    "scripts": ["background.js"],
     "persistent": false
   },
 
