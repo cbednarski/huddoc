@@ -1,26 +1,32 @@
 .huddoc_box {
   display: block;
   position: absolute;
-  background: rgba(255,255,128,.4);
+  background: rgba(192, 192, 64, 0.5);
   color: #fff;
   font: bold 14px helvetica, arial, sans-serif;
   z-index: 9999999;
   border-radius: 3px;
+  text-shadow: 0 0 3px #000;
+  border: 1px dashed #fff;
+  padding: 0 3px;
 }
 
 .huddoc_title {
-  font-size: 30px;
+  font-size: 26px;
+  font-weight: bold;
 }
 
-.huddoc_message {
-  
+.huddoc_description {
+  line-height: 14px;
+  vertical-align: middle;
 }
 
-.huddoc_link {
-  color: #f00;
+a.huddoc_link, a.huddoc_link:visited {
+  color: #2bf;
   text-decoration: none;
 }
 
-.huddoc_link:hover {
+a.huddoc_link:hover {
+  color: #4df;
   text-decoration: underline;
 }

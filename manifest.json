@@ -6,7 +6,7 @@
   "version": "0.1.0",
 
   "permissions": [
-    "tabs",
+    "activeTab",
     "*://*/*"
   ],
 
@@ -21,7 +21,6 @@
   },
 
   "web_accessible_resources": [
-    "ruleset.json",
-    "huddoc.css"
+    "ruleset.json"
   ]
 }

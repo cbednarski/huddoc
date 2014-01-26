@@ -26,9 +26,7 @@ chrome.browserAction.onClicked.addListener(function() {
   if (!initialized) {
     chrome.tabs.executeScript(null, {file: 'jquery-2.1.0.min.js'});
     chrome.tabs.executeScript(null, {file: 'show_messages.js'});
-    chrome.tabs.insertCSS(null, {file: 'huddoc.css'}, function() {
-      console.log('injected css rules');
-    });
+    chrome.tabs.insertCSS(null, {file: 'huddoc.css'});
     initialized = true;
     // Wait for the extension DOM to load. Kinda kludgey
     setTimeout(toggle, 100);

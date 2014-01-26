@@ -39,19 +39,37 @@ function ghost(selector) {
   var el = jQuery(selector);
   var g = document.createElement('div');
 
-  g.className = '.huddoc_box';
-  // g.style.display = 'block';
-  // g.style.position = 'absolute';
+  g.className = 'huddoc_box';
   g.style.width = pixelate(el.width());
   g.style.height = pixelate(el.height());
   g.style.top = pixelate(getTopOffset(el.offset().top));
   g.style.left = pixelate(el.offset().left);
-  // g.style.background = 'rgba(255,255,128,.4)';
-  // g.style.color = '#fff';
-  // g.style.font = 'bold 14px helvetica, arial, sans-serif';
-  // g.style.zIndex = '9999999';
 
   document.body.appendChild(g);
+
+  return g;
+}
+
+function addMessage(g, rule) {
+  var c = '';
+
+  if (rule.title) {
+    c += '<span class="huddoc_title">' + rule.title + '</span> ';
+  }
+  
+  if (rule.description) {
+    c += '<span class="huddoc_description">' + rule.description + '</span> ';
+  }
+
+  if (rule.email) {
+    c += '<a href="mailto:' + rule.email + '" class="huddoc_link">email</a> ';
+  }
+
+  if (rule.url) {
+    c += '<a href="' + rule.url + '" class="huddoc_link">info</a> ';
+  }
+
+  g.innerHTML = c;
 
   return g;
 }
@@ -77,9 +95,7 @@ function activate() {
     var rule = ruleset[i];
     if (check_mask(rule.match)) {
       var el = ghost(rule.selector);
-      el.innerHTML = '<b style="font-size:30px;">' + rule.title + '</b> '
-       + rule.description + ' <a style="color: #f00; text-decoration: none;" href="mailto:'
-       + rule.email + '">email</a>';
+      addMessage(el, rule);
     }
   }
 }
