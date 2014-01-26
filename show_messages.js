@@ -95,6 +95,7 @@ function check_mask(mask) {
 }
 
 function activate() {
+  window.scrollTo(0, 0);
   for (var i in ruleset) {
     var rule = ruleset[i];
     if (check_mask(rule.match)) {
