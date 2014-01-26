@@ -1,13 +1,9 @@
 function activate() {
-  chrome.browserAction.setBadgeBackgroundColor({color: [0,255,128,255]});
-  chrome.browserAction.setBadgeText({text: "On"});
   chrome.tabs.executeScript({code: 'activate()'});
   return true;
 }
 
 function deactivate() {
-  chrome.browserAction.setBadgeBackgroundColor({color: [255,0,128,255]});
-  chrome.browserAction.setBadgeText({text: "Off"});
   chrome.tabs.executeScript({code: 'deactivate()'});
   return false;
 }
@@ -23,15 +19,71 @@ function toggle() {
   }
 }
 
-chrome.browserAction.onClicked.addListener(function() {
-  if (!initialized) {
-    chrome.tabs.executeScript(null, {file: 'jquery-2.1.0.min.js'});
-    chrome.tabs.executeScript(null, {file: 'show_messages.js'});
-    chrome.tabs.insertCSS(null, {file: 'huddoc.css'});
-    initialized = true;
-    // Wait for the extension DOM to load. Kinda kludgey
-    setTimeout(toggle, 100);
-  } else {
-    toggle();
+function initialize(tabId) {
+  chrome.tabs.executeScript(tabId, {file: 'jquery-2.1.0.min.js'});
+  chrome.tabs.executeScript(tabId, {file: 'show_messages.js'});
+  chrome.tabs.insertCSS(tabId, {file: 'huddoc.css'});
+  chrome.pageAction.show(tabId);
+}
+
+function dismantle(tabId) {
+  chrome.pageAction.hide(tabId);
+}
+
+var Ajax = {
+  request: function(method, url, callback, payload) {
+    var req = new XMLHttpRequest();
+    req.open(method, url);
+    req.onreadystatechange = function() {
+      if (req.readyState === 4) {
+        callback(req.responseText, req);
+      }
+    };
+    req.send(payload);
+  },
+  get: function(url, callback) {
+    this.request('GET', url, callback);
+  },
+  post: function(url, payload, callback) {
+    this.request('POST', url, callback, payload);
   }
+};
+
+var ruleset;
+
+function urlInRuleset(url, ruleset) {
+  for (i in ruleset) {
+    if (url.match(new RegExp(ruleset[i].mask))) {
+      console.log('url ' + url + ' matched rule ' + ruleset[i].mask);
+      return true;
+    }
+  }
+  console.log('url ' + url + ' does not match any rules');
+  return false;
+}
+
+function moreMagic(tabId, url, ruleset) {
+  if (urlInRuleset(url, ruleset)) {
+    initialize(tabId);
+  } else {
+    dismantle(tabId);
+  }
+}
+
+function checkForValidUrl(tabId, changeInfo, tab) {
+  if (ruleset === undefined) {
+    Ajax.get('ruleset.json', function(data) {
+      ruleset = JSON.parse(data);
+      moreMagic(tabId, tab.url, ruleset);
+    });
+  } else {
+    moreMagic(tabId, tab.url, ruleset);
+  }
+};
+
+// Listen for any changes to the URL of any tab.
+chrome.tabs.onUpdated.addListener(checkForValidUrl);
+
+chrome.pageAction.onClicked.addListener(function () {
+  toggle();
 });
