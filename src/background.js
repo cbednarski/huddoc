@@ -22,7 +22,7 @@ function toggle(tabId) {
 
 function initialize(tabId) {
   chrome.tabs.executeScript(tabId, {file: 'jquery-2.1.0.min.js'});
-  chrome.tabs.executeScript(tabId, {file: 'Ajax.js'});
+  chrome.tabs.executeScript(tabId, {file: 'ajax.js'});
   chrome.tabs.executeScript(tabId, {file: 'in_browser.js'});
   chrome.tabs.insertCSS(tabId, {file: 'huddoc.css'});
   chrome.pageAction.show(tabId);
@@ -35,7 +35,7 @@ function dismantle(tabId) {
 var ruleset;
 
 function urlInRuleset(url, ruleset) {
-  for (i in ruleset) {
+  for (var i in ruleset) {
     if (url.match(new RegExp(ruleset[i].mask))) {
       // console.log('url ' + url + ' matched rule ' + ruleset[i].mask);
       return true;
