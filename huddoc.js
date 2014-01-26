@@ -1,20 +1,20 @@
-function activate() {
-  chrome.tabs.executeScript({code: 'activate()'});
+function activate(tabId) {
+  chrome.tabs.executeScript(tabId, {code: 'activate()'});
   return true;
 }
 
-function deactivate() {
-  chrome.tabs.executeScript({code: 'deactivate()'});
+function deactivate(tabId) {
+  chrome.tabs.executeScript(tabId, {code: 'deactivate()'});
   return false;
 }
 
-var activated = deactivate();
+var activated = [];
 
-function toggle() {
-  if (activated) {
-    activated = deactivate();
+function toggle(tabId) {
+  if (activated[tabId]) {
+    activated[tabId] = deactivate(tabId);
   } else {
-    activated = activate();
+    activated[tabId] = activate(tabId);
   }
 }
 
@@ -53,11 +53,11 @@ var ruleset;
 function urlInRuleset(url, ruleset) {
   for (i in ruleset) {
     if (url.match(new RegExp(ruleset[i].mask))) {
-      console.log('url ' + url + ' matched rule ' + ruleset[i].mask);
+      // console.log('url ' + url + ' matched rule ' + ruleset[i].mask);
       return true;
     }
   }
-  console.log('url ' + url + ' does not match any rules');
+  // console.log('url ' + url + ' does not match any rules');
   return false;
 }
 
@@ -83,6 +83,6 @@ function checkForValidUrl(tabId, changeInfo, tab) {
 // Listen for any changes to the URL of any tab.
 chrome.tabs.onUpdated.addListener(checkForValidUrl);
 
-chrome.pageAction.onClicked.addListener(function () {
-  toggle();
+chrome.pageAction.onClicked.addListener(function (tab) {
+  toggle(tab.id);
 });
